@@ -1,5 +1,15 @@
 # Simple CRUD for PostgreSQL tables
 
+## Running application
+To start the local server:
+
+    git clone https://github.com/Swich1987/aiohttp-crud
+    cd aiohttp-crud
+    docker-compose up
+    
+After launch it is available at http://127.0.0.1:8080/
+You can try to use it in swagger at http://127.0.0.1:8080/api/doc/
+
 ## Installation
 `pip install -r requirements.txt`
 
