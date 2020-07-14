@@ -1,0 +1,26 @@
+swagger: "2.0"
+info:
+  title: CRUD api
+  description: based on aiohttp universal auto-generated CRUD for PostgreSQL tables
+  version: 1.0.0
+host: 0.0.0.0:8080
+schemes:
+  - http
+paths:
+  /crud/:
+    get:
+      summary: Get list of all tables
+      description: Return list of all tables names which is accessed
+      produces:
+        - application/json
+      tags:
+        - tables
+      responses:
+        200:
+          description: OK
+          schema:
+            type: array
+            items:
+              type: string
+        "400":
+          description: wrong request params

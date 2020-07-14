@@ -1,0 +1,20 @@
+version: '2'
+services:
+  db:
+    image: postgres:12.3-alpine
+    env_file:
+      - prod.env
+    volumes:
+      - ./initdb_sql:/docker-entrypoint-initdb.d
+    ports:
+      - 63432:5432
+  web:
+    restart: always
+    build: .
+    command: ./start.sh
+    volumes:
+      - .:/aiohttp-crud
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
