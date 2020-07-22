@@ -4,7 +4,7 @@ from pathlib import Path
 from dotenv import load_dotenv
 
 cur_dir = os.path.dirname(__file__)
-env_path = Path(cur_dir) / 'prod.env'
+env_path = Path(cur_dir).parent / 'prod.env'
 load_dotenv(dotenv_path=env_path, verbose=True, override=True)
 
 POSTGRES_CRED = {

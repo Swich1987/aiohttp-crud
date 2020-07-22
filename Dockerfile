@@ -12,4 +12,3 @@ RUN apk add --no-cache screen postgresql-libs && \
     apk del .build-deps
 
 RUN ["chmod", "+x", "/aiohttp-crud/start.sh"]
-CMD /aiohttp-crud/start.sh

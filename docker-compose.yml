@@ -13,7 +13,7 @@ services:
     build: .
     command: ./start.sh
     volumes:
-      - .:/aiohttp-crud
+      - ./src/:/aiohttp-crud/src/
     ports:
       - "8080:8080"
     depends_on:
