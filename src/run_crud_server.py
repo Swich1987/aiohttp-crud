@@ -58,9 +58,9 @@ async def table_bulk_insert(request):
 @catch_validation_errors
 async def table_bulk_delete(request):
     id_list = await request.json()
-    rows = postgres_db.bulk_delete(table_name=request.match_info['table_name'],
-                                   raw_id_list=id_list)
-    return web.json_response({'deleted_rows': rows})
+    delete_count = postgres_db.bulk_delete(
+        table_name=request.match_info['table_name'], raw_id_list=id_list)
+    return web.json_response({'deleted_ids': id_list, 'count': delete_count})
 
 
 @routes.post('/crud/{table_name}/update/')

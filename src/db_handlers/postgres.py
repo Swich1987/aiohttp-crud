@@ -42,9 +42,9 @@ class PostgresDB:
                 stmt = table.delete(). \
                     where(table_key.in_(raw_id_list))
 
-                updated_rows = connection.execute(stmt)
+                deleted_rows = connection.execute(stmt)
 
-        return updated_rows.rowcount
+        return deleted_rows.rowcount
 
     def bulk_update(self, table_name, raw_rows):
         # raw_rows in format [{}, {}, ...] with auto-detected primary_key
@@ -62,9 +62,14 @@ class PostgresDB:
                     where(table_key == bindparam(primary_key_name)). \
                     values({key: bindparam(key) for key in valid_rows[0]})
 
-                updated_rows = connection.execute(stmt, valid_rows)
+                connection.execute(stmt, valid_rows)
 
-        return updated_rows.rowcount
+                keys = [col for col in table.c]
+                values = [tuple(row.values()) for row in valid_rows]
+                query = table.select().where(tuple_(*keys).in_(values))
+                updated_rows = [dict(row) for row in connection.execute(query)]
+
+        return updated_rows
 
     def bulk_insert(self, table_name, raw_rows):
         # raw_rows in format [{}, {}, ...] without id
