@@ -22,10 +22,5 @@ def rows_validator_factory(table: Table, with_id=True):
     return type(class_name, (BaseModel,), {'__annotations__': kwargs})
 
 
-class TestPy(BaseModel):
-    name: str
-    address: str
-
-
-class TestPyList(BaseModel):
-    users: List[TestPy]
+class IntListValidator(BaseModel):
+    ids: List[int]
